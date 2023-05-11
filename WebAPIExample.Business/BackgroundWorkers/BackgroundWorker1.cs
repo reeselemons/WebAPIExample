@@ -1,8 +1,11 @@
-﻿public class BackgroundWorkerService : BackgroundService
-{
-    public ILogger<BackgroundWorkerService> _logger { get; set; }
+﻿using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
-    public BackgroundWorkerService(ILogger<BackgroundWorkerService> logger)
+public class BackgroundWorker1 : BackgroundService
+{
+    public ILogger<BackgroundWorker1> _logger { get; set; }
+
+    public BackgroundWorker1(ILogger<BackgroundWorker1> logger)
     {
         _logger = logger;
     }

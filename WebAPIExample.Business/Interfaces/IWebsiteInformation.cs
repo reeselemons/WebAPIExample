@@ -7,8 +7,8 @@ using WebAPIExample.Business.DataModels;
 
 namespace WebAPIExample.Business.Interfaces
 {
-    public interface IMember
+    public interface IWebsiteInformation
     {
-        public Member CreateMember(); 
+        public WebsiteInformation CreateModel(); 
     }
 }

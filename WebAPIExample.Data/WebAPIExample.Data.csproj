@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WebAPIExample.Business\WebAPIExample.Business.csproj" />
+    <ProjectReference Include="..\WebAPIEXample.Configuration\WebAPIEXample.Configuration.csproj" />
   </ItemGroup>
 
 </Project>

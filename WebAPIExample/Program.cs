@@ -1,15 +1,13 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Logging.Configuration;
 using Serilog;
+using WebAPIExample.Business.BackgroundWorkers;
+using WebAPIExample.Business.DependencyInjection;
 using static WebAPIExample.Business.Constants.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddJsonFile("appsettings.json");
 
-
-//Reading from appsettings.json file
 Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
     .CreateLogger();
@@ -18,19 +16,27 @@ builder.Host.UseSerilog(Log.Logger);
 
 // Add services to the container.
 
+builder.AddBackgroundWorkerServices();
+builder.AddInjectors();
+
 builder.Services.AddControllers();
-builder.Services.AddHostedService<BackgroundWorkerService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
   .AddCookie(AUTH_SCHEME, o => o.LoginPath = new PathString("/Login"));
-
 
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("LoggedIn", policy => policy.RequireRole("Authenticated"));
 });
 
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromDays(1);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 app.UseSerilogRequestLogging();
@@ -44,7 +50,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
+app.UseSession();
 
 app.MapControllers();
 
