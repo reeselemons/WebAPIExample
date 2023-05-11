@@ -8,6 +8,6 @@ namespace WebAPIExample.Business.Enums
 {
     public enum AuthorizedStatus
     {
-        success, failed
+        unAuthorized, authorized
     }
 }

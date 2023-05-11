@@ -11,7 +11,7 @@ using static WebAPIExample.Business.Constants.Auth;
 namespace WebAPIExample.Controllers
 {
     [ApiController]
-    [Route("[controller]/[action]")]
+    [Route("[controller]")]
     public class ProductsController : BaseController
     {
         public ProductsController(ILogger<LoginController> logger)
@@ -33,8 +33,7 @@ namespace WebAPIExample.Controllers
                     return BadRequest("Invalid model object");
                 }
 
-                ProductLogic productLogic = new ProductLogic();
-                ProductResponse response = productLogic.GetProduct(productRequestModel);
+                ProductResponse response = new ProductLogic().GetProduct(productRequestModel);
 
                 return Content(response.ToJson());
             }
@@ -58,8 +57,7 @@ namespace WebAPIExample.Controllers
                     return BadRequest("Invalid model object");
                 }
 
-                ProductLogic productLogic = new ProductLogic();
-                ProductsResponse response = productLogic.GetProducts(productRequestModel);
+                ProductsResponse response = new ProductLogic().GetProducts(productRequestModel);
 
                 return Content(response.ToJson());
             }
@@ -83,8 +81,7 @@ namespace WebAPIExample.Controllers
                     return BadRequest("Invalid model object");
                 }
 
-                ProductLogic productLogic = new ProductLogic();
-                ProductsResponse response = productLogic.GetAllProducts();
+                ProductsResponse response = new ProductLogic().GetAllProducts();
 
                 return Content(response.ToJson());
             }

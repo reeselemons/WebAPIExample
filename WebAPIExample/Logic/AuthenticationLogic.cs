@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using WebAPIExample.Business.DataModels;
@@ -14,7 +15,7 @@ namespace WebAPIExample.Logic
 {
     public class AuthenticationLogic
     {
-        public async Task<AuthResponseModel> Login(HttpContext httpContext, AuthRequestModel model)
+        public async Task<AuthorizeUserResponseModel> Login(HttpContext httpContext, AuthRequestModel model)
         {
             List<Member> memberDatabase = new MemberDatabase().GetMembers();
 
@@ -27,19 +28,25 @@ namespace WebAPIExample.Logic
             var authUser = Guid.NewGuid().ToString();
             var authToken = Guid.NewGuid().ToString();
 
-            claims.Add(new Claim(AUTH_USER_ID, authUser));
-            claims.Add(new Claim(AUTH_TOKEN, authToken));
+            claims.Add(new Claim(ClaimTypes.Name, found.UserId.ToString()));
+            claims.Add(new Claim(ClaimTypes.Role, AUTHENTICATED));
+            claims.Add(new Claim(ClaimTypes.NameIdentifier, authToken));
 
-            var identity = new ClaimsIdentity(claims, AUTH_SCHEME);
+            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var user = new ClaimsPrincipal(identity);
-            await httpContext.SignInAsync(AUTH_SCHEME, user, Authentication.AuthProperties);
+            await httpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, user, AuthProperties);
 
-            return new AuthResponseModel()
+            return new AuthorizeUserResponseModel()
             {
-                Status = AuthorizedStatus.success,
+                Status = AuthorizedStatus.authorized,
                 UserId = authUser,
                 Token = authToken,
             };
         }
+        public void Logout(HttpContext httpContext)
+        {
+            httpContext.SignOutAsync();
+        }
+
     }
 }

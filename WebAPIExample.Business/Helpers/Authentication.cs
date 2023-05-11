@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using WebAPIExample.Business.Enums;
@@ -23,10 +25,10 @@ namespace WebAPIExample.Business.Helpers
             if (!headerDict.ContainsKey(AUTH_HTTP_TOKEN))
                 throw new Exception(HttpCodes.UNATHORIZED.ToString());
 
-            if (!httpContext.User.Identities.Any(x => x.AuthenticationType == AUTH_TOKEN))
+            if (!httpContext.User.Identities.Any(x => x.AuthenticationType == CookieAuthenticationDefaults.AuthenticationScheme))
                 throw new Exception(HttpCodes.UNATHORIZED.ToString());
 
-            if (!httpContext.User.HasClaim(AUTH_TOKEN, headerDict[AUTH_HTTP_TOKEN]))
+            if (!httpContext.User.HasClaim(ClaimTypes.NameIdentifier, headerDict[AUTH_HTTP_TOKEN]))
                 throw new Exception(HttpCodes.UNATHORIZED.ToString());
         }
 

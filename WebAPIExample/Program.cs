@@ -16,15 +16,15 @@ builder.Host.UseSerilog(Log.Logger);
 
 // Add services to the container.
 
-builder.AddBackgroundWorkerServices();
-builder.AddInjectors();
+//builder.AddBackgroundWorkerServices();
+//builder.AddInjectors();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-  .AddCookie(AUTH_SCHEME, o => o.LoginPath = new PathString("/Login"));
+  .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, o => o.LoginPath = new PathString("/Login"));
 
 builder.Services.AddAuthorization(options =>
 {
@@ -33,10 +33,14 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromDays(1);
-    options.Cookie.HttpOnly = true;
+    options.Cookie.Name = "SessionCookie";
+    options.Cookie.Domain = "localhost";
+    options.Cookie.Path = "/";
+    options.Cookie.HttpOnly = false;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
     options.Cookie.IsEssential = true;
 });
+builder.Services.AddDistributedMemoryCache();
 
 var app = builder.Build();
 app.UseSerilogRequestLogging();
@@ -52,6 +56,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.UseSession();
 
 app.MapControllers();

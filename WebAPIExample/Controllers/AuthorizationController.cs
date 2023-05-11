@@ -19,14 +19,13 @@ namespace WebAPIExample.Controllers
         public LoginController(ILogger<LoginController> logger)
             : base(logger) { }
 
-        [HttpPost(Name = "Authorize")]
-        public async Task<IActionResult> Post([FromBody] AuthRequestModel authRequestModel)
+
+        [HttpGet]
+        [Route("IsAuthorized")]
+        public IActionResult IsAuthorized()
         {
             try
             {
- 
-                RequestValidator.Validate(authRequestModel);
-
                 if (!ModelState.IsValid)
                 {
                     _logger.LogError("Invalid owner object sent from client.");
@@ -37,12 +36,51 @@ namespace WebAPIExample.Controllers
 
                 }
                 AuthenticationLogic logic = new AuthenticationLogic();
-                AuthResponseModel response = await logic.Login(HttpContext, authRequestModel);
-                if (!HttpContext.User.Identities.Any(x => x.AuthenticationType == AUTH_TOKEN))
+                
+                return Content(new IsAuthorizedResponseModel()
                 {
+                    Status = HttpContext.User.Identity != null && HttpContext.User.Identity.IsAuthenticated 
+                    ? AuthorizedStatus.authorized : AuthorizedStatus.unAuthorized
+                }.ToJson());
+            }
+            catch (Exception ex)
+            {
+                return HttpResponseHandler.DetermineResponse(ex.Message);
+            }
+        }
 
+        [HttpPost]
+        [Route("AuthorizeUser")]
+        public async Task<IActionResult> AuthorizeUser([FromBody] AuthRequestModel authRequestModel)
+        {
+            try
+            {
+                 RequestValidator.Validate(authRequestModel);
+
+                if (!ModelState.IsValid)
+                {
+                    _logger.LogError("Invalid owner object sent from client.");
+                    return BadRequest("Invalid model object");
                 }
+                AuthorizeUserResponseModel response = await new AuthenticationLogic().Login(HttpContext, authRequestModel);
+
                 return Content(response.ToJson());
+            }
+            catch (Exception ex)
+            {
+                return HttpResponseHandler.DetermineResponse(ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("Logout")]
+        public IActionResult Logout()
+        {
+            try
+            {
+                Authentication.IsTokenValid(Request.Headers, HttpContext);
+                new AuthenticationLogic().Logout(HttpContext);
+
+                return Ok();
             }
             catch (Exception ex)
             {

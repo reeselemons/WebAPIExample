@@ -4,10 +4,8 @@ using WebAPIExample.Business.Interfaces;
 
 namespace WebAPIExample.Business.Models
 {
-    public class AuthResponseModel : ResponseModelHelper
+    public class IsAuthorizedResponseModel : ResponseModelHelper
     {
         public AuthorizedStatus? Status;
-        public string? UserId;
-        public string? Token;
     }
 }
