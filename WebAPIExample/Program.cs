@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Serilog;
 using WebAPIExample.Business.BackgroundWorkers;
 using WebAPIExample.Business.DependencyInjection;
-using static WebAPIExample.Business.Constants.Auth;
+using WebAPIEXample.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,8 +16,8 @@ builder.Host.UseSerilog(Log.Logger);
 
 // Add services to the container.
 
-//builder.AddBackgroundWorkerServices();
-//builder.AddInjectors();
+builder.AddBackgroundWorkerServices();
+builder.AddInjectors(WebsiteType.StandardCoreSite);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

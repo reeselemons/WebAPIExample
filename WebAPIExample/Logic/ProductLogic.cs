@@ -1,13 +1,7 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using WebAPIExample.Business.DataModels;
+﻿using WebAPIExample.Business.DataModels;
 using WebAPIExample.Business.Enums;
-using WebAPIExample.Business.Interfaces;
 using WebAPIExample.Business.Models;
 using WebAPIExample.Data;
-using static WebAPIExample.Business.Constants.Auth;
-using static WebAPIExample.Business.Helpers.Authentication;
 
 namespace WebAPIExample.Logic
 {
@@ -17,32 +11,41 @@ namespace WebAPIExample.Logic
         {
             List<Product> productDatabase = new ProductDatabase().GetProducts();
 
+            var found = productDatabase.FirstOrDefault(e => e.ProductId == model.Id);
+            
+            if (found == null)
+                throw new Exception(HttpCodes.NO_CONTENT.ToString());
+
             return new ProductResponse()
             {
-                Product = productDatabase.FirstOrDefault(e => e.ProductId == model.Id)
+                Product = found.Map(found)
             };
         }
         public ProductsResponse GetProducts(ProductsRequestModel model)
         {
             List<Product> productDatabase = new ProductDatabase().GetProducts();
-            List<Product> products = new List<Product>();
+            List<ProductDto> productDTOs = new List<ProductDto>();
 
             foreach (var id in model.Ids)
             {
                 var found = productDatabase.FirstOrDefault(e => e.ProductId == id);
 
                 if (found != null)
-                    products.Add(found);
+                    productDTOs.Add(found.Map(found));
             }
 
-            return new ProductsResponse() { Products = products };
+            return new ProductsResponse() { Products = productDTOs };
 
         }
         public ProductsResponse GetAllProducts()
         {
             List<Product> productDatabase = new ProductDatabase().GetProducts();
+            List<ProductDto> productDTOs = new List<ProductDto>();
 
-            return new ProductsResponse() { Products = productDatabase };
+            foreach (var model in productDatabase)
+                productDTOs.Add(model.Map(model));
+
+            return new ProductsResponse() { Products = productDTOs };
 
         }
     }

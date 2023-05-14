@@ -1,12 +1,7 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Mvc;
-using System.Net;
-using System.Security.Claims;
-using WebAPIExample.Business.Enums;
+﻿using Microsoft.AspNetCore.Mvc;
 using WebAPIExample.Business.Helpers;
 using WebAPIExample.Business.Models;
 using WebAPIExample.Logic;
-using static WebAPIExample.Business.Constants.Auth;
 
 namespace WebAPIExample.Controllers
 {

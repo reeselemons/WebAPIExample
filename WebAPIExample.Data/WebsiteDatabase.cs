@@ -1,17 +1,19 @@
 ﻿using WebAPIExample.Business.DataModels;
+using WebAPIEXample.Business;
+using WebAPIEXample.Configuration;
 
 namespace WebAPIExample.Data
 {
     public class WebsiteDatabase
     {
-        public List<WebsiteInformation> GetProducts()
+        public List<WebsiteInformation> GetWebsites()
         {
             List<Member> memberDatabase = new MemberDatabase().GetMembers();
+
+   
             return new List<WebsiteInformation>()
             {
-                new WebsiteInformation(Guid.NewGuid(), "People R Us", "peoplerus.com", memberDatabase[1]),
-                new WebsiteInformation(Guid.NewGuid(), "Googlet", "googlet.com", memberDatabase[2]),
-                new WebsiteInformation(Guid.NewGuid(), "Power Bills Sync", "powerbillssync.com", memberDatabase[3])
+                new WebsiteInformation(WebsiteType.WebAPISite)
             };
         }
     }

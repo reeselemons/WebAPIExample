@@ -13,40 +13,21 @@ using static WebAPIExample.Business.Helpers.Authentication;
 
 namespace WebAPIExample.Logic
 {
-    public class AuthenticationLogic
+    public class WebsiteInformationLogic
     {
-        public async Task<AuthorizeUserResponseModel> Login(HttpContext httpContext, AuthRequestModel model)
+        public WebsiteInformationResponseModel GetWebsite(WebsiteInformationRequestModel model)
         {
-            List<Member> memberDatabase = new MemberDatabase().GetMembers();
+            List<WebsiteInformation> websites = new WebsiteDatabase().GetWebsites();
 
-            var found = memberDatabase.Where(e => e.Username == model.Username && e.SaltedPassword == CalculateMD5(model.Password)).FirstOrDefault();
+            var found = websites.Where(e => e.WebsiteId == model.Id).FirstOrDefault();
 
             if (found == null)
-                throw new Exception(HttpCodes.UNATHORIZED.ToString());
+                throw new Exception(HttpCodes.NO_CONTENT.ToString());
 
-            var claims = new List<Claim>();
-            var authUser = Guid.NewGuid().ToString();
-            var authToken = Guid.NewGuid().ToString();
-
-            claims.Add(new Claim(ClaimTypes.Name, found.UserId.ToString()));
-            claims.Add(new Claim(ClaimTypes.Role, AUTHENTICATED));
-            claims.Add(new Claim(ClaimTypes.NameIdentifier, authToken));
-
-            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-            var user = new ClaimsPrincipal(identity);
-            await httpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, user, AuthProperties);
-
-            return new AuthorizeUserResponseModel()
+            return new WebsiteInformationResponseModel()
             {
-                Status = AuthorizedStatus.authorized,
-                UserId = authUser,
-                Token = authToken,
+               WebsiteInformation = found
             };
         }
-        public void Logout(HttpContext httpContext)
-        {
-            httpContext.SignOutAsync();
-        }
-
     }
 }
