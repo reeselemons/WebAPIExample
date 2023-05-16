@@ -1,33 +1,36 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-public class BackgroundWorker1 : BackgroundService
+namespace WebAPIExample.Business.BackgroundWorkers
 {
-    public ILogger<BackgroundWorker1> _logger { get; set; }
-
-    public BackgroundWorker1(ILogger<BackgroundWorker1> logger)
+    public class BackgroundWorker1 : BackgroundService
     {
-        _logger = logger;
-    }
+        public ILogger<BackgroundWorker1> _logger { get; set; }
 
-    public Task StartAsync(CancellationToken cancellationToken)
-    {
-        _logger.LogInformation("Service started.");
-        return Task.CompletedTask;
-    }
+        public BackgroundWorker1(ILogger<BackgroundWorker1> logger)
+        {
+            _logger = logger;
+        }
 
-    public Task StopAsync(CancellationToken cancellationToken)
-    {
-        _logger.LogInformation("Service stopped.");
-        return Task.CompletedTask;
-    }
+        public Task StartAsync(CancellationToken cancellationToken)
+        {
+            _logger.LogInformation("Service started.");
+            return Task.CompletedTask;
+        }
 
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-    {
-        //while (!stoppingToken.IsCancellationRequested)
-        //{
-        //    _logger.LogInformation($"Worker running at: {DateTimeOffset.Now}");
-        //    await Task.Delay(1000, stoppingToken);
-        //}
+        public Task StopAsync(CancellationToken cancellationToken)
+        {
+            _logger.LogInformation("Service stopped.");
+            return Task.CompletedTask;
+        }
+
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        {
+            //while (!stoppingToken.IsCancellationRequested)
+            //{
+            //    _logger.LogInformation($"Worker running at: {DateTimeOffset.Now}");
+            //    await Task.Delay(1000, stoppingToken);
+            //}
+        }
     }
 }

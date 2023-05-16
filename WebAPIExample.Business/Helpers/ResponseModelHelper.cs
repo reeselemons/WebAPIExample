@@ -12,5 +12,9 @@ namespace WebAPIExample.Business.Helpers
     public class ResponseModelHelper : IResponse
     {
         public virtual string ToJson() => JsonConvert.SerializeObject(this);
+        public ResponseModelHelper()
+        {
+
+        }
     }
 }

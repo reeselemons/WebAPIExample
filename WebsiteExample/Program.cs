@@ -16,10 +16,10 @@ builder.Host.UseSerilog(Log.Logger);
 // Add services to the container.
 
 builder.AddBackgroundWorkerServices();
-builder.AddInjectors(WebsiteType.WebAPISite);
+builder.AddInjectors(WebsiteType.StandardCoreSite);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
 var app = builder.Build();
 

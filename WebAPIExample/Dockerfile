@@ -1,4 +1,4 @@
-#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
@@ -7,10 +7,10 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["WebAPIExample/WebAPIExample.csproj", "WebAPIExample/"]
-RUN dotnet restore "WebAPIExample/WebAPIExample.csproj"
+COPY ["WebAPIExample.csproj", "."]
+RUN dotnet restore "./WebAPIExample.csproj"
 COPY . .
-WORKDIR "/src/WebAPIExample"
+WORKDIR "/src/."
 RUN dotnet build "WebAPIExample.csproj" -c Release -o /app/build
 
 FROM build AS publish

@@ -1,16 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using WebAPIExample.Business.Interfaces;
 
 namespace WebsiteExample.Pages
 {
-    public class IndexModel : PageModel
+    public class IndexModel : BasePageModel
     {
-        private readonly ILogger<IndexModel> _logger;
-
-        public IndexModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
+        public IndexModel(ILogger<IndexModel> logger, IWebsiteInformation websiteInformation) : base(logger, websiteInformation) { }
 
         public void OnGet()
         {

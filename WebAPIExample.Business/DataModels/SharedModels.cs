@@ -16,5 +16,7 @@ namespace WebAPIExample.Business.DataModels
     {
         public DateTime Created { get; set; } = DateTime.Now;
         public DateTime Modified { get; set; } = DateTime.Now;
+
+        public Shared() => Created = Modified = DateTime.Now;
     }
 }

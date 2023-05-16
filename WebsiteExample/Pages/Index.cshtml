@@ -2,27 +2,37 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home - ";
+    WebsiteInformation websiteModel = _website.CreateModel();
 }
-
-
 <div class="container-fluid">
     <div id="about" class="row about-section">
         <div class="col-lg-4 about-card">
             <h3 class="font-weight-light">Who am I ?</h3>
             <span class="line mb-5"></span>
-            <h5 class="mb-3">A Web Designer / Developer Located In Our Lovely Earth</h5>
-            <p class="mt-20">Lorem ipsum dolor sit amet, consectetur adipisicing elit.sit amet, Qui deserunt consequatur fugit repellendusillo voluptas?</p>
+            <h5 class="mb-3">Fullstack Software Engineer</h5>
+            <p class="mt-20">
+                I am experienced and versatile in both front-end and back-end development. With a deep understanding of both client-side and server-side technologies, I am capable of creating end-to-end software solutions.
+            </p>
+            <p class="mt-20">
+                On the front-end, I am very is proficient with such technologies as HTML, CSS3, SASS, and JavaScript. I have nearly a decade of experience developing intuitive and interactive user interfaces. I have experience working with frameworks such as React and Angular to build dynamic web applications with the propers hooks and state management that deliver exceptional user experiences.
+            </p>
+            <p class="mt-20">
+                On the back-end, I utilize the server-side programming CSharp. I am experienced in designing and developing robust APIs, managing databases, and handling server configurations. I have experience with frameworks and technologies like .NET to efficiently build scalable and secure backend systems.
+            </p>
+            <p class="mt-20">
+                With many years of problem-solving, I understand the importance of working independently and collaboratively, whether within my team or with a team in another branch of development or management.
+            </p>
+            <p class="mt-20">
+                Lastly, I understand how to comprehend project requirements and translate them into effective and efficient software solutions. My comprehensive skill set can help create or contribute to viable software development lifecycle, from planning and design to implementation and testing.
+            </p>
             <button class="btn btn-outline-danger"><i class="icon-down-circled2 "></i>Download My CV</button>
         </div>
         <div class="col-lg-4 about-card">
             <h3 class="font-weight-light">Personal Info</h3>
             <span class="line mb-5"></span>
             <ul class="mt40 info list-unstyled">
-                <li><span>Birthdate</span> : 09/13/1996</li>
-                <li><span>Email</span> : info@website.com</li>
-                <li><span>Phone</span> : + (123) 456-7890</li>
-                <li><span>Skype</span> : John_Doe </li>
-                <li><span>Address</span> :  12345 Fake ST NoWhere AB Country.</li>
+                <li><span>Currently Lives In</span> : Atlanta, GA</li>
+                <li><span>Previously Lived In</span> : Los Angeles, CA</li>
             </ul>
             <ul class="social-icons pt-3">
                 <li class="social-item"><a class="social-link" href="#"><i class="ti-facebook" aria-hidden="true"></i></a></li>
@@ -62,6 +72,34 @@
         </div>
     </div>
 </div>
+<section class="section bg-dark text-center">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-6">
+                <div class="row ">
+                    <div class="col-5 text-right text-light border-right py-3">
+                        <div class="m-auto"><i class="ti-alarm-clock icon-xl"></i></div>
+                    </div>
+                    <div class="col-7 text-left py-3">
+                        <h1 class="text-danger font-weight-bold font40">@websiteModel.ResumeObjects.Count</h1>
+                        <p class="text-light mb-1">Jobs Worked</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-5 text-right text-light border-right py-3">
+                        <div class="m-auto"><i class="ti-layers-alt icon-xl"></i></div>
+                    </div>
+                    <div class="col-7 text-left py-3">
+                        <h1 class="text-danger font-weight-bold font40">@websiteModel.ResumeObjects.Count</h1>
+                        <p class="text-light mb-1">Skills</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!--Resume Section-->
 <section class="section" id="resume">
@@ -72,22 +110,19 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="mt-2">
-                            <h4>Expertise</h4>
+                            <h4>Employment History</h4>
                             <span class="line"></span>
                         </div>
                     </div>
                     <div class="card-body">
-                        <h6 class="title text-danger">2017 - Present</h6>
-                        <P>UX Developer</P>
-                        <P class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum recusandae, cupiditate ullam dolor ratione repellendus.aliquid repudiandae saepe!.</P>
-                        <hr>
-                        <h6 class="title text-danger">2016 - 2017</h6>
-                        <P>Front-end Developer</P>
-                        <P class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum recusandae, cupiditate ullam dolor ratione repellendus.aliquid repudiandae saepe!.</P>
-                        <hr>
-                        <h6 class="title text-danger">2015 - 2016</h6>
-                        <P>UX Designer</P>
-                        <P class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum recusandae, cupiditate ullam dolor ratione repellendus.aliquid repudiandae saepe!.</P>
+                        @foreach (var obj in websiteModel.ResumeObjects)
+                        {
+                            <h6 class="title text-danger">@obj.EmploymentTitle</h6>
+                            <h5>@obj.CompanyName - @obj.Location</h5>
+                            <h6>@obj.StartDate - @obj.EndDate</h6>
+                            <P class="subtitle">@Html.Raw(obj.Description.Replace(Environment.NewLine, "<br />"))</P>
+                            <hr>
+                        }
                     </div>
                 </div>
             </div>
@@ -100,18 +135,10 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <h6 class="title text-danger">2017 - Present</h6>
-                        <P>B.E Computer Engineering</P>
-                        <P class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error corrupti recusandae obcaecati odit repellat ducimus cum, minus tempora aperiam at.</P>
+                        <h6 class="title text-danger">Bachelors in Information Technology</h6>
+                        <h6>Southern Polytechnic State University</h6>
+                        <P class="subtitle">Graduating from Southern Polytechnic State University with a Bachelor's degree in Information Technology was an accomplishment that marked the culmination of years of dedication, hard work, and a deep passion for the field of IT.</P>
                         <hr>
-                        <h6 class="title text-danger">2016 - 2017</h6>
-                        <P>Diploma in Computer Engineering</P>
-                        <P class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, id officiis quas placeat quia voluptas dolorum rem animi nostrum quae.aliquid repudiandae saepe!.</P>
-                        <hr>
-                        <h6 class="title text-danger">2015 - 2016</h6>
-                        <P>High School Degree</P>
-                        <P class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum recusandae, cupiditate ullam dolor ratione repellendus.aliquid repudiandae saepe!.</P>
-
                     </div>
                 </div>
             </div>
@@ -124,52 +151,14 @@
                         </div>
                     </div>
                     <div class="card-body pb-2">
-                        <h6>hTL5 &amp; CSS3</h6>
-                        <div class="progress mb-3">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 97%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <h6>JavaScript</h6>
-                        <div class="progress mb-3">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 85%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <h6>PHP</h6>
-                        <div class="progress mb-3">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 80%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <h6>SQL</h6>
-                        <div class="progress mb-3">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 90%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <h6>Laborum</h6>
-                        <div class="progress mb-3">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 90%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <h6>Tempora</h6>
-                        <div class="progress mb-3">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 90%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <div class="pull-left">
-                            <h4 class="mt-2">Languages</h4>
-                            <span class="line"></span>
-                        </div>
-                    </div>
-                    <div class="card-body pb-2">
-                        <h6>English</h6>
-                        <div class="progress mb-3">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 80%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <h6>French</h6>
-                        <div class="progress mb-3">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 45%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <h6>Spanish</h6>
-                        <div class="progress mb-3">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 67%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
+                        @foreach (var skill in websiteModel.Skills)
+                        {
+                            <h6>@skill.Name</h6>
+
+                            <div class="progress mb-3">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: @(skill.SkillRating)%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
@@ -180,47 +169,14 @@
 <section class="section bg-dark text-center">
     <div class="container">
         <div class="row text-center">
-            <div class="col-md-6 col-lg-3">
+            <div class="col-md-12">
                 <div class="row ">
                     <div class="col-5 text-right text-light border-right py-3">
                         <div class="m-auto"><i class="ti-alarm-clock icon-xl"></i></div>
                     </div>
                     <div class="col-7 text-left py-3">
-                        <h1 class="text-danger font-weight-bold font40">500</h1>
-                        <p class="text-light mb-1">Hours Worked</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="row">
-                    <div class="col-5 text-right text-light border-right py-3">
-                        <div class="m-auto"><i class="ti-layers-alt icon-xl"></i></div>
-                    </div>
-                    <div class="col-7 text-left py-3">
-                        <h1 class="text-danger font-weight-bold font40">50K</h1>
-                        <p class="text-light mb-1">Project Finished</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="row">
-                    <div class="col-5 text-right text-light border-right py-3">
-                        <div class="m-auto"><i class="ti-face-smile icon-xl"></i></div>
-                    </div>
-                    <div class="col-7 text-left py-3">
-                        <h1 class="text-danger font-weight-bold font40">200K</h1>
-                        <p class="text-light mb-1">Happy Clients</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="row">
-                    <div class="col-5 text-right text-light border-right py-3">
-                        <div class="m-auto"><i class="ti-heart-broken icon-xl"></i></div>
-                    </div>
-                    <div class="col-7 text-left py-3">
-                        <h1 class="text-danger font-weight-bold font40">2k</h1>
-                        <p class="text-light mb-1">Coffee Drinked</p>
+                        <h1 class="text-danger font-weight-bold font40">@websiteModel.ResumeObjects.Count</h1>
+                        <p class="text-light mb-1">Jobs Worked</p>
                     </div>
                 </div>
             </div>

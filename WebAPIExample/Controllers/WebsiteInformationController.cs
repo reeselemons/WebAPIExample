@@ -19,7 +19,6 @@ namespace WebAPIExample.Controllers
         {
             try
             {
-                Authentication.IsTokenValid(Request.Headers, HttpContext);
                 RequestValidator.Validate(websiteInformationRequestModel);
 
                 if (!ModelState.IsValid)

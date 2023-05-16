@@ -13,7 +13,10 @@ namespace WebAPIExample.Business.DataModels
         public string Url { get; set; } = string.Empty;
         public List<WebsiteInformationResumeObject> ResumeObjects = new List<WebsiteInformationResumeObject>();
         public List<WebsiteInformationResumeSkillsObject> Skills = new List<WebsiteInformationResumeSkillsObject>();
+        public WebsiteInformation()
+        {
 
+        }
         public WebsiteInformation(WebsiteType websiteId)
         {
             if (WebsiteType.WebAPISite == websiteId)

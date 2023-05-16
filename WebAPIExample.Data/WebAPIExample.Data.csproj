@@ -4,11 +4,13 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>MBL.Data</PackageId>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WebAPIExample.Business\WebAPIExample.Business.csproj" />
-    <ProjectReference Include="..\WebAPIEXample.Configuration\WebAPIEXample.Configuration.csproj" />
+    <PackageReference Include="MBL.Business" Version="1.0.2" />
   </ItemGroup>
 
 </Project>
