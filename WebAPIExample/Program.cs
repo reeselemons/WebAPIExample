@@ -26,8 +26,8 @@ builder.AddInjectors(WebsiteType.StandardCoreSite);
 
 //Database Logic
 //I add my enviroment variables when the docker container is created
-if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("connectionString")))
-    throw new Exception("connectionString enviroment variable is empty");
+//if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("connectionString")))
+//    throw new Exception("connectionString enviroment variable is empty");
 //builder.Services.AddDbContext<DataContext>(options =>
 //options.UseSqlServer(Environment.GetEnvironmentVariable(Environment.GetEnvironmentVariable("connectionString"))));
 

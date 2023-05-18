@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="Data\Skills.yaml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="MBL.Business" Version="1.0.4" />
     <PackageReference Include="MBL.Configuration" Version="1.0.1" />
     <PackageReference Include="MBL.Data" Version="1.0.2" />
@@ -34,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\" />
     <Folder Include="Logs\" />
   </ItemGroup>
 
