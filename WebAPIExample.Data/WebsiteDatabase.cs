@@ -8,12 +8,12 @@ namespace WebAPIExample.Data
     {
         public List<WebsiteInformation> GetWebsites()
         {
-            List<Member> memberDatabase = new MemberDatabase().GetMembers();
-
-   
             return new List<WebsiteInformation>()
             {
-                new WebsiteInformation(WebsiteType.WebAPISite)
+                new WebsiteInformation(WebsiteType.WebAPISite),
+                new WebsiteInformation(WebsiteType.AngualarSite),
+                new WebsiteInformation(WebsiteType.StandardCoreSite),
+                new WebsiteInformation(WebsiteType.ReactSite),
             };
         }
     }

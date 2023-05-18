@@ -110,6 +110,22 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="mt-2">
+                            <h4>Education</h4>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="title text-danger">Bachelors in Information Technology</h6>
+                        <h6>Southern Polytechnic State University</h6>
+                        <P class="subtitle">Graduating from Southern Polytechnic State University with a Bachelor's degree in Information Technology was an accomplishment that marked the culmination of years of dedication, hard work, and a deep passion for the field of IT.</P>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="mt-2">
                             <h4>Employment History</h4>
                             <span class="line"></span>
                         </div>
@@ -123,22 +139,6 @@
                             <P class="subtitle">@Html.Raw(obj.Description.Replace(Environment.NewLine, "<br />"))</P>
                             <hr>
                         }
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="mt-2">
-                            <h4>Education</h4>
-                            <span class="line"></span>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h6 class="title text-danger">Bachelors in Information Technology</h6>
-                        <h6>Southern Polytechnic State University</h6>
-                        <P class="subtitle">Graduating from Southern Polytechnic State University with a Bachelor's degree in Information Technology was an accomplishment that marked the culmination of years of dedication, hard work, and a deep passion for the field of IT.</P>
-                        <hr>
                     </div>
                 </div>
             </div>
@@ -169,14 +169,25 @@
 <section class="section bg-dark text-center">
     <div class="container">
         <div class="row text-center">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="row ">
                     <div class="col-5 text-right text-light border-right py-3">
                         <div class="m-auto"><i class="ti-alarm-clock icon-xl"></i></div>
                     </div>
                     <div class="col-7 text-left py-3">
-                        <h1 class="text-danger font-weight-bold font40">@websiteModel.ResumeObjects.Count</h1>
-                        <p class="text-light mb-1">Jobs Worked</p>
+                        <h1 class="text-danger font-weight-bold font40">6</h1>
+                        <p class="text-light mb-1">Viewable Portfolio Projects</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row ">
+                    <div class="col-5 text-right text-light border-right py-3">
+                        <div class="m-auto"><i class="ti-alarm-clock icon-xl"></i></div>
+                    </div>
+                    <div class="col-7 text-left py-3">
+                        <h1 class="text-danger font-weight-bold font40">19</h1>
+                        <p class="text-light mb-1">Total Projects</p>
                     </div>
                 </div>
             </div>
@@ -186,68 +197,69 @@
 
 <section class="section" id="blog">
     <div class="container">
-        <h2 class="mb-5">Latest <span class="text-danger">News</span></h2>
+        <h2 class="mb-5">Latest <span class="text-danger">Projects</span></h2>
         <div class="row">
             <div class="blog-card">
-                <div class="img-holder">
-                    <img src="~/imgs/blog1.jpg" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
-                </div>
+                <a class="img-holder" href="https://foliocards.net" target="_blank">
+                    <img src="~/imgs/blog1.jpg" alt="Foliocards">
+                </a>
                 <div class="content-holder">
-                    <h6 class="title">Consectetur adipisicing elit</h6>
+                    <h6 class="title">Foliocards</h6>
+                    <p>NFC Business Card E-commerce Store</p>
+                    <p>HTML/CSS/JS/C#/EF 6/.NET6</p>
 
-                    <p class="post-details">
-                        <a href="#">By: Admin</a>
-                        <a href="#"><i class="ti-heart text-danger"></i> 234</a>
-                        <a href="#"><i class="ti-comment"></i> 123</a>
-                    </p>
-
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet nesciunt qui sit velit delectus voluptates, repellat ipsum culpa id deleniti. Rerum debitis facilis accusantium neque numquam mollitia modi quasi distinctio.</p>
-
-                    <p><b>Necessitatibus nihil impedit! Ex nisi eveniet, dolor aliquid consequuntur repudiandae.</b></p>
-                    <p>Magnam in repellat enim harum omnis aperiam! Explicabo illo, commodi, dolor blanditiis cupiditate harum nisi vero accusamus laudantium voluptatibus dolores quae obcaecati.</p>
-
-                    <a href="#" class="read-more">Read more <i class="ti-angle-double-right"></i></a>
+                    <a href="https://foliocards.net" class="read-more">Read more <i class="ti-angle-double-right"></i></a>
                 </div>
-            </div><!-- end of blog wrapper -->
-            <!-- blog-card -->
+            </div>
             <div class="blog-card">
-                <div class="img-holder">
-                    <img src="~/imgs/blog2.jpg" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
-                </div>
+                <a class="img-holder" href="https://indieabbey.com/Store" target="_blank">
+                    <img src="~/imgs/blog2.jpg" alt="IndieAbbey">
+                </a>
                 <div class="content-holder">
-                    <h6 class="title">Explicabo illo</h6>
+                    <h6 class="title">IndieAbbey Example Store</h6>
+                    <p>Compleptely functional E-commerce Store</p>
+                    <p>HTML/CSS/JS/C#/EF 6/.NET6</p>
 
-                    <p class="post-details">
-                        <a href="#">By: Admin</a>
-                        <a href="#"><i class="ti-heart text-danger"></i> 456</a>
-                        <a href="#"><i class="ti-comment"></i> 264</a>
-                    </p>
-
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit excepturi laborum enim, vitae ipsam atque eum, ad iusto consequuntur voluptas, esse doloribus. Perferendis porro quisquam vitae exercitationem aliquid, minus eos laborum repudiandae, cumque debitis iusto omnis praesentium? Laborum placeat sit adipisci illum tempore maxime, esse qui quae? Molestias excepturi corporis similique doloribus. Esse vitae earum architecto nulla non dolores illum at perspiciatis quod, et deleniti cupiditate reiciendis harum facere, delectus eum commodi soluta distinctio sit repudiandae possimus sunt. Ipsum, rem.</p>
-
-                    <a href="#" class="read-more">Read more <i class="ti-angle-double-right"></i></a>
+                    <a href="https://indieabbey.com/Store" class="read-more">Visit <i class="ti-angle-double-right"></i></a>
                 </div>
-            </div><!-- end of blog wrapper -->
-            <!-- blog-card -->
+            </div>
             <div class="blog-card">
-                <div class="img-holder">
-                    <img src="~/imgs/blog3.jpg" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
-                </div>
+                <a class="img-holder" href="https://ticketing.indieabbey.com/events" target="_blank">
+                    <img src="~/imgs/blog3.jpg" alt="IndieAbbey Ticketing">
+                </a>
                 <div class="content-holder">
-                    <h4 class="title">Porro Quisqua</h4>
+                    <h4 class="title">IndieAbbey Ticketing</h4>
+                    <p>A platform individuals use to sell/purchase tickets</p>
+                    <p>HTML/CSS/JS/C#/EF 6/.NET6</p>
 
-                    <p class="post-details">
-                        <a href="#">By: Admin</a>
-                        <a href="#"><i class="ti-heart text-danger"></i> 431</a>
-                        <a href="#"><i class="ti-comment"></i> 312</a>
-                    </p>
-
-                    <p> consectetur adipisicing elit. Impedit excepturi laborum enim, vitae ipsam atque eum, ad iusto consequuntur voluptas, esse doloribus. Perferendis porro quisquam vitae exercitationem aliquid, minus eos laborum repudiandae, cumque debitis iusto omnis praesentium? Laborum placeat sit adipisci illum tempore maxime, esse qui quae? Molestias excepturi corporis similique doloribus. Esse vitae earum architecto nulla non dolores illum at perspiciatis quod, et deleniti cupiditate reiciendis harum facere, delectus eum commodi soluta distinctio sit repudiandae possimus sunt. Ipsum, rem.</p>
-
-                    <a href="#" class="read-more">Read more <i class="ti-angle-double-right"></i></a>
+                    <a href="https://ticketing.indieabbey.com/events" class="read-more">Visit <i class="ti-angle-double-right"></i></a>
                 </div>
-            </div><!-- end of blog wrapper -->
+            </div>
+            <div class="blog-card">
+                <a class="img-holder" href="https://booking.indieabbey.com/?id=6" target="_blank">
+                    <img src="~/imgs/blog3.jpg" alt="IndieAbbey Booking">
+                </a>
+                <div class="content-holder">
+                    <h4 class="title">IndieAbbey Booking</h4>
+                    <p>A platform for individuals took book reservsations at events and venues.</p>
+                    <p>React/CSS/HTML\Web APIs</p>
 
+                    <a href="https://booking.indieabbey.com/?id=6" class="read-more">Visit <i class="ti-angle-double-right"></i></a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <a class="img-holder" href="https://proxy.houlem.com" target="_blank">
+                    <img src="~/imgs/blog3.jpg" alt="DBLTap.tv">
+                </a>
+                <div class="content-holder">
+                    <h4 class="title">Live Streaming</h4>
+                    <p>Live streaming website that is used to show off livestream technology I have create.</p>
+
+                    <p>Blazor/FFMPEG/SignalR\Web APIs</p>
+
+                    <a href="https://proxy.houlem.com" class="read-more">Visit <i class="ti-angle-double-right"></i></a>
+                </div>
+            </div>
         </div>
     </div>
 </section>

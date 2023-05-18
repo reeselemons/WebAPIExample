@@ -1,8 +1,11 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.Configuration;
 using Serilog;
 using WebAPIExample.Business.BackgroundWorkers;
 using WebAPIExample.Business.DependencyInjection;
 using WebAPIEXample.Configuration;
+using WebAPIExample.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,8 +19,18 @@ builder.Host.UseSerilog(Log.Logger);
 
 // Add services to the container.
 
+//Typically would include logging background workers
 builder.AddBackgroundWorkerServices();
+//Dependency Injection logic
 builder.AddInjectors(WebsiteType.StandardCoreSite);
+
+//Database Logic
+//I add my enviroment variables when the docker container is created
+if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("connectionString")))
+    throw new Exception("connectionString enviroment variable is empty");
+//builder.Services.AddDbContext<DataContext>(options =>
+//options.UseSqlServer(Environment.GetEnvironmentVariable(Environment.GetEnvironmentVariable("connectionString"))));
+
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

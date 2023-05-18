@@ -14,6 +14,7 @@ namespace WebAPIExample.Business.DependencyInjection
         public WebsiteInformationInjector(WebsiteType websiteId) : base(websiteId)
         {
             WebsiteId = websiteId;
+            //This will be refactored in the near future.
             if (WebsiteType.StandardCoreSite == websiteId)
                 Task.Run(() => GetWebsite()).Wait();
 
@@ -22,6 +23,8 @@ namespace WebAPIExample.Business.DependencyInjection
         public void GetWebsite()
         {
             HttpRequestBuilder httpRequestBuilder = new HttpRequestBuilder();
+
+            //Typically would use a HttpClient because Webclient is deprecated. The code is provided in HttpRequestBuilder
             WebClient httpClient = new WebClient();
             HttpResponseModel response = httpRequestBuilder.CreateGetData(httpClient, $"{Constants.General.BASE_API}/websiteinformation/GetWebsiteById", $"websiteId={WebsiteId}");
             if (response.StatusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(response.Data))
