@@ -32,10 +32,13 @@ namespace WebAPIExample.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //Set a default name for any product that the name propeprty was null for.
             modelBuilder.Entity<Product>()
                 .Property(b => b.Name)
             .HasDefaultValue("No Name");
-
+            //Let's assume there will be a large array of products. Our users will search by their name, the index will help speed the query load time.
+            modelBuilder.Entity<Product>().HasIndex(p => p.Name);
+            //Sample seed data.
             modelBuilder.Entity<Product>().OwnsOne(p => p.Name).HasData(
                 new { ProductId = Guid.NewGuid(), Name = "Shoelace", Description = "This is for your shoes", Price = 1.12 },
                 new { ProductId = Guid.NewGuid(), Name = "Tie", Description = "Wear this on your interviews", Price = 15.45 });
