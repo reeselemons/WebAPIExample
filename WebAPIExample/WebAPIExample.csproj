@@ -9,13 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Data\Skills.yaml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="MBL.Business" Version="1.0.4" />
+    <PackageReference Include="MBL.Business" Version="1.0.5" />
     <PackageReference Include="MBL.Configuration" Version="1.0.1" />
-    <PackageReference Include="MBL.Data" Version="1.0.2" />
+    <PackageReference Include="MBL.Data" Version="1.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="7.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
@@ -30,7 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
     <Folder Include="Logs\" />
   </ItemGroup>
 

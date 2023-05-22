@@ -1,15 +1,7 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using WebAPIExample.Business.DataModels;
+﻿using WebAPIExample.Business.DataModels;
 using WebAPIExample.Business.Enums;
-using WebAPIExample.Business.Helpers;
-using WebAPIExample.Business.Interfaces;
 using WebAPIExample.Business.Models;
 using WebAPIExample.Data;
-using static WebAPIExample.Business.Constants.Auth;
-using static WebAPIExample.Business.Helpers.Authentication;
 
 namespace WebAPIExample.Logic
 {

@@ -16,7 +16,10 @@ namespace WebAPIExample.Business.DependencyInjection
             WebsiteId = websiteId;
             //This will be refactored in the near future.
             if (WebsiteType.StandardCoreSite == websiteId)
+            {
                 Task.Run(() => GetWebsite()).Wait();
+                Task.Run(() => GetSkills()).Wait();
+            }
 
         }
 
@@ -33,7 +36,6 @@ namespace WebAPIExample.Business.DependencyInjection
                 if (websiteInformation.WebsiteInformation != null)
                 {
                     this.Name = websiteInformation.WebsiteInformation.Name;
-                    this.Skills = websiteInformation.WebsiteInformation.Skills;
                     this.ResumeObjects = websiteInformation.WebsiteInformation.ResumeObjects;
                     this.Url = websiteInformation.WebsiteInformation.Url;
                     this.Created = DateTime.Now;
@@ -45,7 +47,25 @@ namespace WebAPIExample.Business.DependencyInjection
                 throw new Exception("Failed to load website from API");
 
         }
+        public void GetSkills()
+        {
+            HttpRequestBuilder httpRequestBuilder = new HttpRequestBuilder();
 
+            //Typically would use a HttpClient because Webclient is deprecated. The code is provided in HttpRequestBuilder
+            WebClient httpClient = new WebClient();
+            HttpResponseModel response = httpRequestBuilder.CreateGetData(httpClient, $"{Constants.General.BASE_API}/websiteinformation/GetSkillCategories");
+            if (response.StatusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(response.Data))
+            {
+                ResumeSkillsCategoriesResponseModel websiteInformation = JsonConvert.DeserializeObject<ResumeSkillsCategoriesResponseModel>(response.Data);
+                if (websiteInformation.Categories.Count > 0)
+                    this.SkillsCategories = websiteInformation.Categories;
+                else
+                    throw new Exception("Skill categories did not populate from API");
+            }
+            else
+                throw new Exception("Failed to load website from API");
+
+        }
         public WebsiteInformation CreateModel()
         {
             return this;

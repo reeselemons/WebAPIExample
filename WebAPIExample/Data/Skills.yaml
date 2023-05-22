@@ -1,38 +1,37 @@
-﻿skills: 
-  categories: 
-  - name: General
-    items: 
-    - name: C#.NET 4.5-7 Framework
-    - name: Javascript/CSS/SASS
-    - name: React Web/Native
-    - name: React Testing Library
-    - name: N-Unit Testing
-    - name: Docker
-    - name: SQL Queries
-  - name: Azure
-    items: 
-    - name: Linux
-    - name: Docker
-    - name: Load Balancing With Nginx
-    - name: Data Sync
-    - name: Front-Door/CDN Profiles
-    - name: Storage Accounts
-    - name: Service Bus
-    - name: Event Hubs
-  - name: AWS
-    items: 
-    - name: ECS - including automated tasks/alarms
-    - name: EC2
-    - name: CloudWatch
-    - name: CloudTrail
-    - name: Cognito
-    - name: Cognito User Pools
-    - name: Jenkins
-    - name: Octopus
-    - name: GitLab
-    - name: Database
-  - name: Database
-    items: 
-    - name: SQL Server
-    - name: PostgreSQL
-    - name: Code First EF
+﻿categories: 
+ - name: General
+   items: 
+   - name: C#.NET 4.5-7 Framework
+   - name: Javascript/CSS/SASS
+   - name: React Web/Native
+   - name: React Testing Library
+   - name: N-Unit Testing
+   - name: Docker
+   - name: SQL Queries
+ - name: Azure
+   items: 
+   - name: Linux
+   - name: Docker
+   - name: Load Balancing With Nginx
+   - name: Data Sync
+   - name: Front-Door/CDN Profiles
+   - name: Storage Accounts
+   - name: Service Bus
+   - name: Event Hubs
+ - name: AWS
+   items: 
+   - name: ECS - including automated tasks/alarms
+   - name: EC2
+   - name: CloudWatch
+   - name: CloudTrail
+   - name: Cognito
+   - name: Cognito User Pools
+   - name: Jenkins
+   - name: Octopus
+   - name: GitLab
+   - name: Database
+ - name: Database
+   items: 
+   - name: SQL Server
+   - name: PostgreSQL
+   - name: Code First EF

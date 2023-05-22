@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
+using WebAPIExample.Business.Models;
 using WebAPIEXample.Configuration;
 
 namespace WebAPIExample.Business.DataModels
@@ -12,7 +13,7 @@ namespace WebAPIExample.Business.DataModels
         public string Name { get; set; } = string.Empty;
         public string Url { get; set; } = string.Empty;
         public List<WebsiteInformationResumeObject> ResumeObjects = new List<WebsiteInformationResumeObject>();
-        public List<WebsiteInformationResumeSkillsObject> Skills = new List<WebsiteInformationResumeSkillsObject>();
+        public List<Category> SkillsCategories = new List<Category>();
         public WebsiteInformation()
         {
 
@@ -58,17 +59,5 @@ namespace WebAPIExample.Business.DataModels
             EmploymentTitle = employmentTitle;
             Description = description;
         }
-    }
-    public class WebsiteInformationResumeSkillsObject
-    {
-        public string Name { get; set; } = string.Empty;
-        public string SkillRating { get; set; } = string.Empty;
-
-        public WebsiteInformationResumeSkillsObject(string name, string skillRating)
-        {
-            Name = name;
-            SkillRating = skillRating;
-        }
-
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebAPIExample.Business.DataModels;
 using WebAPIExample.Business.Helpers;
 using WebAPIExample.Business.Models;
+using WebAPIExample.Data;
 using WebAPIExample.Logic;
 
 namespace WebAPIExample.Controllers
@@ -30,6 +32,24 @@ namespace WebAPIExample.Controllers
                 WebsiteInformationResponseModel response = new WebsiteInformationLogic().GetWebsite(websiteInformationRequestModel);
 
                 return Content(response.ToJson());
+            }
+            catch (Exception ex)
+            {
+                return HttpResponseHandler.DetermineResponse(ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("GetSkillCategories")]
+        public IActionResult GetSkillCategories()
+        {
+            try
+            {
+                List<Category> categories = new SkillsDatabase().GetSkillCategories();
+
+                return Ok(new ResumeSkillsCategoriesResponseModel()
+                {
+                    Categories = categories
+                });
             }
             catch (Exception ex)
             {
