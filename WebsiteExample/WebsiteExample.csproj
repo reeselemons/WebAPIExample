@@ -25,5 +25,9 @@
   <ItemGroup>
     <Folder Include="Logs\" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\WebAPIExample.Business\WebAPIExample.Business.csproj" />
+  </ItemGroup>
 
 </Project>
