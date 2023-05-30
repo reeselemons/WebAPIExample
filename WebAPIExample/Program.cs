@@ -1,11 +1,10 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.Extensions.Configuration;
 using Serilog;
 using WebAPIExample.Business.BackgroundWorkers;
 using WebAPIExample.Business.DependencyInjection;
 using WebAPIEXample.Configuration;
-using WebAPIExample.Data;
-using Microsoft.EntityFrameworkCore;
+
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +35,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(MyAllowSpecificOrigins, policy => {
+
+        policy.AllowAnyOrigin()//WithOrigins("http://mauriceblemons.com", "http://localhost:4200")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
   .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, o => o.LoginPath = new PathString("/Login"));
 
@@ -65,14 +74,28 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+if (app.Environment.IsProduction())
+{
+    // Enable middleware to serve generated Swagger as a JSON endpoint.
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("v1/swagger.json", "MyAPI V1");
+    });
+}
+
+//app.UseHttpsRedirection();
+
+app.UseStaticFiles();
+app.UseRouting();
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseSession();
 
-app.MapControllers();
+app.MapControllers().RequireCors(MyAllowSpecificOrigins); ;
 
 try
 {

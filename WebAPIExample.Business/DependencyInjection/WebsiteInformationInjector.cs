@@ -14,13 +14,17 @@ namespace WebAPIExample.Business.DependencyInjection
         public WebsiteInformationInjector(WebsiteType websiteId) : base(websiteId)
         {
             WebsiteId = websiteId;
-            //This will be refactored in the near future.
-            if (WebsiteType.StandardCoreSite == websiteId)
+            //Could use the typical IF/ELSE but a switch statement looks cleaner
+            switch (websiteId)
             {
-                Task.Run(() => GetWebsite()).Wait();
-                Task.Run(() => GetSkills()).Wait();
+                case WebsiteType.AngualarSite:
+                case WebsiteType.ReactSite:
+                case WebsiteType.StandardCoreSite:
+                    Task.Run(() => GetWebsite()).Wait();
+                    Task.Run(() => GetSkills()).Wait();
+                    break;
+                default: break;
             }
-
         }
 
         public void GetWebsite()
@@ -47,13 +51,13 @@ namespace WebAPIExample.Business.DependencyInjection
                 throw new Exception("Failed to load website from API");
 
         }
-        public void GetSkills()
+        public async Task GetSkills()
         {
             HttpRequestBuilder httpRequestBuilder = new HttpRequestBuilder();
 
             //Typically would use a HttpClient because Webclient is deprecated. The code is provided in HttpRequestBuilder
-            WebClient httpClient = new WebClient();
-            HttpResponseModel response = httpRequestBuilder.CreateGetData(httpClient, $"{Constants.General.BASE_API}/websiteinformation/GetSkillCategories");
+            HttpClient httpClient = new HttpClient();
+            HttpResponseModel response = await httpRequestBuilder.CreateGetData(httpClient, $"{Constants.General.BASE_API}/websiteinformation/GetSkillCategories");
             if (response.StatusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(response.Data))
             {
                 ResumeSkillsCategoriesResponseModel websiteInformation = JsonConvert.DeserializeObject<ResumeSkillsCategoriesResponseModel>(response.Data);

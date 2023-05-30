@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MBL.Business" Version="1.0.5" />
+    <PackageReference Include="MBL.Business" Version="1.0.7" />
     <PackageReference Include="MBL.Configuration" Version="1.0.1" />
     <PackageReference Include="MBL.Data" Version="1.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="7.0.5" />
