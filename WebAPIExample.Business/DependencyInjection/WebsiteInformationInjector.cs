@@ -17,12 +17,13 @@ namespace WebAPIExample.Business.DependencyInjection
             //Could use the typical IF/ELSE but a switch statement looks cleaner
             switch (websiteId)
             {
-                case WebsiteType.AngualarSite:
-                case WebsiteType.ReactSite:
-                case WebsiteType.StandardCoreSite:
+                case WebsiteType.WebAPISite:
                     Task.Run(() => GetWebsite()).Wait();
                     Task.Run(() => GetSkills()).Wait();
                     break;
+                case WebsiteType.ReactSite:
+                case WebsiteType.StandardCoreSite:
+                case WebsiteType.AngualarSite:
                 default: break;
             }
         }

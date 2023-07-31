@@ -18,7 +18,7 @@ export class NavMenu extends Component {
                 <h4 class="header-subtitle">Welcome to my portfolio</h4>
                 <h1 class="header-title">Maurice Lemons</h1>
                 <h6 class="header-mono">Fullstack Software Engineer</h6>
-                @*<button class="btn btn-primary btn-rounded"><i class="ti-printer pr-2"></i>Print Resume</button>*@
+                {/*<button class="btn btn-primary btn-rounded"><i class="ti-printer pr-2"></i>Print Resume</button>*/}
             </div>
         </div>
     </header>
